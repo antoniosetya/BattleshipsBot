@@ -1,8 +1,0 @@
-{
-	"Author":"John Doe",
-    "Email":"john.doe@example.com",
-    "NickName" :"Rusty",
-    "BotType": 8,
-    "ProjectLocation" : "",
-    "RunFile" : "target\\release\\rust_sample_bot.exe"
-}

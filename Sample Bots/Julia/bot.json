@@ -1,9 +1,0 @@
-{
-    "Author" : "Marius Kruger",
-    "Email" : "marius.kruger@entelect.co.za",
-    "NickName" : "Julia",
-    "BotType": "Julia",
-    "ProjectLocation" : "",
-    "RunFile" : "main.jl",
-    "RunArgs" : ""
-}

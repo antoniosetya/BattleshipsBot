@@ -1,9 +1,0 @@
-{
-    "Author" : "Gerrit van Huyssteen",
-    "Email" : "gerrit@brazenhill.com",
-    "NickName" : "JavaScriptSampleBot",
-    "BotType": "JavaScript",
-    "ProjectLocation" : "",
-    "RunFile" : "bot.js",
-    "RunArgs" : ""
-}
