@@ -9,6 +9,11 @@ game_state_file = "state.json"
 output_path = '.'
 map_size = 0
 
+ship_size = {"Submarine" : 3,
+            "Battleship" : 4,
+            "Carrier" : 5,
+            "Cruiser" : 3,
+            "Destroyer" : 2}
 
 def main(player_key):
     global map_size
@@ -34,6 +39,16 @@ def fire_shot(opponent_map):
     # To send through a command please pass through the following <code>,<x>,<y>
     # Possible codes: 1 - Fireshot, 0 - Do Nothing (please pass through coordinates if
     #  code 1 is your choice)
+
+    """
+        * Random ke tengah secara papan catur
+        * Jika kena :
+            * Jika punya shot yang special:
+                *
+                *
+
+    """
+
     targets = []
     for cell in opponent_map:
         if not cell['Damaged'] and not cell['Missed']:
@@ -48,6 +63,12 @@ def place_ships():
     # Please place your ships in the following format <Shipname> <x> <y> <direction>
     # Ship names: Battleship, Cruiser, Carrier, Destroyer, Submarine
     # Directions: north east south west
+
+    """
+        * Random kapal pertama
+        * Untuk kapal kedua - keempat, random jarak 1 - 2 (1 - 3 untuk ukuran map besar (14x14))
+        * Random kapal kelima
+    """
 
     ships = ['Battleship 1 0 north',
              'Carrier 3 1 East',
