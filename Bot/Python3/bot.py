@@ -133,14 +133,11 @@ def place_ships():
     # Please place your ships in the following format <Shipname> <x> <y> <direction>
     # Ship names: Battleship, Cruiser, Carrier, Destroyer, Submarine
     # Directions: north east south west
-    """ Rules of placing the ship :
-        * Randomize the placement of the first ship.
-        * For the second, third, and fourth ship, select between 1 or 2 spaces (1 - 3 for bigger map (14x14)) that go between currently
+    """ Randomize all the ships position.
+          ALTERNATIVE (see commented section) :
+          For the second, third, and fourth ship, select between 1 or 2 spaces (1 - 3 for bigger map (14x14)) that go between currently
           selected ship and the previous ship.
-          ALTERNATIVE : Just randomize it. On testing, this has proven to be better, quicker, and safer way. (code in comments in that section)
-        * Randomize the last (fifth) ship.
-        For each ship, the direction is perpendicular to the previously placed ship.
-    """
+          For each ship, the direction is perpendicular to the previously placed ship. """
     global map_size
     dummy_map = []
     for i in range(map_size):
@@ -171,30 +168,31 @@ def place_ships():
     # Puts that information into the dummy map
     InsertShipIntoMap(temp,dummy_map)
     # Removes that ship type from the list of ships
-    #ships.remove(ship_type)
+    # ships.remove(ship_type)
 
     # Placing the 2nd - 4th ship
-    if (map_size >= 14):
+    """if (map_size >= 14):
         max_dist = 3
     else:
-        max_dist = 2
+        max_dist = 2 """
 
     for i in range(3):
-        previous_ship = (copy.copy(ship_command_placement[-1])).split(" ")
-        ship_type = random.choice(ships)
+        # previous_ship = (copy.copy(ship_command_placement[-1])).split(" ")
+        ship_type = random.choice(ships) # Randomize what ship will be put now
         valid = False
         while not valid:
-            dist = random.choice([random.randint(1,max_dist),random.randint(0-max_dist,-1)])
+            # The alternative way
+            """ dist = random.choice([random.randint(1,max_dist),random.randint(0-max_dist,-1)])
             x = dist + int(previous_ship[1])
             y = dist + int(previous_ship[2])
             if ((previous_ship[3] == "north") or (previous_ship[3] == "south")):
                 direct = random.choice(["east","west"])
             else:
-                direct = random.choice(["north","south"])
-            #x = random.randint(0,map_size-1)
-            #y = random.randint(0,map_size-1)
-            #direct = random.choice(['north','south','east','west'])
-
+                direct = random.choice(["north","south"])  """
+            # Currently used steps - just randomize it
+            x = random.randint(0,map_size-1)
+            y = random.randint(0,map_size-1)
+            direct = random.choice(['north','south','east','west'])
             valid = test_ship_placement(ship_type,x,y,direct,dummy_map)
         temp = ship_type + " " + str(x) + " " + str(y) + " " + direct
         print(temp)
