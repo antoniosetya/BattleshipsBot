@@ -111,13 +111,23 @@ def attack_state(opponent_map1):
                     firsthitx = -1
                     firsthity = -1
                     attackdirection = 0
+                elif int(prevstatus[1]) == 2:
+                    attackstatus = 1
+                    firsthitx = x
+                    firsthity = y
+                    attackdirection = 0
                 elif int(prevstatus[2]) != int(currentship[0]) and int(currentship[1]) != 17-int(targethit):
                     attackstatus = 2
                     firsthitx = int(prevstatus[4])
                     firsthity = int(prevstatus[5])
                     attackdirection = 0
             elif cell['Missed'] and int(cell['X']) == int(x) and int(cell['Y']) == int(y):
-                if int(prevstatus[4]) == -1 and int(prevstatus[5]) == -1:
+                if int(prevstatus[1]) == 2:
+                    attackstatus = 2
+                    firsthitx = int(prevstatus[4])
+                    firsthity = int(prevstatus[5])
+                    attackdirection = 0
+                elif int(prevstatus[4]) == -1 and int(prevstatus[5]) == -1:
                     attackstatus = 0
                     firsthitx = -1
                     firsthity = -1

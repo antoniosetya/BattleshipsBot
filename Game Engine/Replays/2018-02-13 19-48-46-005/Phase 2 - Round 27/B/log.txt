@@ -1,0 +1,17 @@
+
+13-02-2018 19:48:54:783 - D: 	Executing bot with following commands python.exe "bot.py" B "C:\Users\alvin limassa\Documents\GitHub\BattleshipsBot\Game Engine\Replays\2018-02-13 19-48-46-005\Phase 2 - Round 27\B"
+13-02-2018 19:48:54:783 - I: 	Executing process python.exe "bot.py" B "C:\Users\alvin limassa\Documents\GitHub\BattleshipsBot\Game Engine\Replays\2018-02-13 19-48-46-005\Phase 2 - Round 27\B"
+13-02-2018 19:48:54:798 - I: 	Bot has 4000ms to run before it will be forcefully killed
+13-02-2018 19:48:54:877 - E: 	Output from bot: Traceback (most recent call last):
+13-02-2018 19:48:54:877 - E: 	Output from bot:   File "bot.py", line 418, in <module>
+13-02-2018 19:48:54:877 - E: 	Output from bot:     main(args.PlayerKey)
+13-02-2018 19:48:54:877 - E: 	Output from bot:   File "bot.py", line 30, in main
+13-02-2018 19:48:54:877 - E: 	Output from bot:     fire_shot(state['OpponentMap']['Cells'])
+13-02-2018 19:48:54:877 - E: 	Output from bot:   File "bot.py", line 214, in fire_shot
+13-02-2018 19:48:54:877 - E: 	Output from bot:     target = random.choice(targets)
+13-02-2018 19:48:54:877 - E: 	Output from bot:   File "C:\Users\alvin limassa\AppData\Local\Programs\Python\Python37\lib\random.py", line 259, in choice
+13-02-2018 19:48:54:877 - E: 	Output from bot:     raise IndexError('Cannot choose from an empty sequence') from None
+13-02-2018 19:48:54:877 - E: 	Output from bot: IndexError: Cannot choose from an empty sequence
+13-02-2018 19:48:54:877 - E: 	Output from bot: 
+13-02-2018 19:48:54:877 - I: 	Output from bot: 
+13-02-2018 19:48:54:877 - I: 	Your bots total execution time was 00:00:00.0929065
