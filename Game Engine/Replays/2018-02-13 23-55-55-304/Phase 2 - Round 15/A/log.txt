@@ -1,0 +1,7 @@
+
+13-02-2018 23:56:01:577 - D: 	Executing bot with following commands python.exe "bot.py" A "C:\Users\alvin limassa\Documents\GitHub\BattleshipsBot\Game Engine\Replays\2018-02-13 23-55-55-304\Phase 2 - Round 15\A"
+13-02-2018 23:56:01:577 - I: 	Executing process python.exe "bot.py" A "C:\Users\alvin limassa\Documents\GitHub\BattleshipsBot\Game Engine\Replays\2018-02-13 23-55-55-304\Phase 2 - Round 15\A"
+13-02-2018 23:56:01:583 - I: 	Bot has 4000ms to run before it will be forcefully killed
+13-02-2018 23:56:01:701 - E: 	Output from bot: 
+13-02-2018 23:56:01:701 - I: 	Output from bot: 
+13-02-2018 23:56:01:705 - I: 	Your bots total execution time was 00:00:00.1274946
