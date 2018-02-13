@@ -205,10 +205,6 @@ def fire_shot(opponent_map):
             if not cell['Damaged'] and not cell['Missed'] and int(attackstatus[0]) == 1 and int(cell['X']) == int(attackstatus[4]) and int(cell['Y']) == int(attackstatus[5])-1:
                 valid_cell = cell['X'], cell['Y']
                 targets.append(valid_cell)
-        elif int(attackstatus[0]) == 2:
-            if not cell['Damaged'] and not cell['Missed'] and int(attackstatus[0]) == 1 and int(cell['X']) >= int(attackstatus[4])-3 and int(cell['X']) <= int(attackstatus[4])+3 and int(cell['Y']) <= int(attackstatus[5])+3 and int(cell['Y']) >= int(attackstatus[5])-3:
-                valid_cell = cell['X'], cell['Y']
-                targets.append(valid_cell)
             
     if not targets:
         for cell in opponent_map:
@@ -224,7 +220,7 @@ def fire_shot(opponent_map):
                         if int(cell['X']) == int(cellss['X']) and int(cell['Y'])+1 == int(cellss['Y']) and cellss['Missed']:
                             valid_cell = cellss['X'], cellss['Y']
                             targets.append(valid_cell)
-                        if int(cell['X'])+1 == int(cellss['X']) and int(cell['Y'])-1 == int(cellss['Y']) and cellss['Missed']:
+                        if int(cell['X']) == int(cellss['X']) and int(cell['Y'])-1 == int(cellss['Y']) and cellss['Missed']:
                             valid_cell = cellss['X'], cellss['Y']
                             targets.append(valid_cell)
             elif not cell['Damaged'] and not cell['Missed'] and (int(cell['X']) + int(cell['Y'])) % 2 == 0 and int(attackstatus[0]) == 0:
