@@ -82,15 +82,15 @@ def attack_state(opponent_map1):
                     firsthitx = int(x)
                     firsthity = int(y)
                     attackdirection = 0
-                elif int(prevstatus[2]) == int(currentship[0]) and int(currentship[1]) != 17-int(targethit) and prevstatus[1]==2:
+                elif int(prevstatus[2]) == int(currentship[0]) and int(currentship[1]) != 17-int(targethit) and int(prevstatus[1])==2:
                     attackstatus = 2
                     firsthitx = int(prevstatus[4])
                     firsthity = int(prevstatus[5])
                     attackdirection = 0
-                elif int(prevstatus[2]) != int(currentship[0]) and int(currentship[1]) == 17-int(targethit) and prevstatus[1] == 2:
-                    attackstatus == 2
-                    firsthitx = int(prevstatus[4])
-                    firsthity = int(prevstatus[5])
+                elif int(prevstatus[2]) != int(currentship[0]) and int(currentship[1]) == 17-int(targethit) and int(prevstatus[1]) == 2:
+                    attackstatus = 0
+                    firsthitx = -1
+                    firsthity = -1
                     attackdirection = 0
                 elif int(prevstatus[2]) == int(currentship[0]) and int(currentship[1]) == 17-int(targethit):
                     attackstatus = 1
@@ -223,10 +223,10 @@ def fire_shot(opponent_map):
                         if int(cell['X']) == int(cellss['X']) and int(cell['Y'])-1 == int(cellss['Y']) and not cellss['Missed'] and not cellss['Damaged']:
                             valid_cell = cellss['X'], cellss['Y']
                             targets.append(valid_cell)
-            elif not cell['Damaged'] and not cell['Missed'] and (int(cell['X']) + int(cell['Y'])) % 2 == 0 and int(attackstatus[0]) == 0:
+            if not cell['Damaged'] and not cell['Missed'] and (int(cell['X']) + int(cell['Y'])) % 2 == 0 and int(attackstatus[0]) == 0:
                 valid_cell = cell['X'], cell['Y']
                 targets.append(valid_cell)
-            elif not cell['Damaged'] and not cell['Missed'] and int(attackstatus[0]) == 1:
+            if not cell['Damaged'] and not cell['Missed'] and int(attackstatus[0]) == 1:
                 if not cell['Damaged'] and not cell['Missed'] and int(attackstatus[0]) == 1 and int(cell['X']) == int(attackstatus[1])+1 and int(cell['Y']) == int(attackstatus[2]):
                     valid_cell = cell['X'], cell['Y']
                     targets.append(valid_cell)
