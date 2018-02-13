@@ -256,23 +256,95 @@ def place_ships():
     # Please place your ships in the following format <Shipname> <x> <y> <direction>
     # Ship names: Battleship, Cruiser, Carrier, Destroyer, Submarine
     # Directions: north east south west
+    """ Randomize all the ships position.
+          ALTERNATIVE (see commented section) :
+          For the second, third, and fourth ship, select between 1 or 2 spaces (1 - 3 for bigger map (14x14)) that go between currently
+          selected ship and the previous ship.
+          For each ship, the direction is perpendicular to the previously placed ship. """
+    global map_size
+    dummy_map = []
+    for i in range(map_size):
+        dummy_map.append([])
+        for j in range(map_size):
+            dummy_map[i].append('~')
+    ships = ['Battleship','Carrier','Destroyer','Submarine']
+    ship_command_placement = []
 
-    ships = ['Battleship 1 0 north',
-             'Carrier 3 1 East',
-             'Cruiser 4 2 north',
-             'Destroyer 7 3 north',
-             'Submarine 1 8 East'
-             ]
+    # Placing the first ship
+    ship_type = 'Cruiser'
+    x = random.randint(0,map_size-1)
+    y = random.randint(0,map_size-1)
+    direct = random.choice(['north','south','east','west'])
+    if (not test_ship_placement(ship_type,x,y,direct,dummy_map)):
+        if (direct == "north"):
+            direct = "south"
+        elif (direct == "south"):
+            direct = "north"
+        elif (direct == "east"):
+            direct = "west"
+        else: # direct == "west"
+            direct = "east"
+    temp = ship_type + " " + str(x) + " " + str(y) + " " + direct
+    print(temp)
+    # Puts that information into the command queue
+    ship_command_placement.append(temp)
+    # Puts that information into the dummy map
+    InsertShipIntoMap(temp,dummy_map)
+    # Removes that ship type from the list of ships
+    # ships.remove(ship_type)
 
+    # Placing the 2nd - 4th ship
+    """if (map_size >= 14):
+        max_dist = 3
+    else:
+        max_dist = 2 """
+
+    for i in range(3):
+        # previous_ship = (copy.copy(ship_command_placement[-1])).split(" ")
+        ship_type = random.choice(ships) # Randomize what ship will be put now
+        valid = False
+        while not valid:
+            # The alternative way
+            """ dist = random.choice([random.randint(1,max_dist),random.randint(0-max_dist,-1)])
+            x = dist + int(previous_ship[1])
+            y = dist + int(previous_ship[2])
+            if ((previous_ship[3] == "north") or (previous_ship[3] == "south")):
+                direct = random.choice(["east","west"])
+            else:
+                direct = random.choice(["north","south"])  """
+            # Currently used steps - just randomize it
+            x = random.randint(0,map_size-1)
+            y = random.randint(0,map_size-1)
+            direct = random.choice(['north','south','east','west'])
+            valid = test_ship_placement(ship_type,x,y,direct,dummy_map)
+        temp = ship_type + " " + str(x) + " " + str(y) + " " + direct
+        print(temp)
+        ship_command_placement.append(temp)
+        # Removes that ship type from the list of ships
+        ships.remove(ship_type)
+        InsertShipIntoMap(temp,dummy_map)
+
+    # Placing the last ship
+    valid = False
+    ship_type = ships[-1]
+    while not valid:
+        x = random.randint(0,map_size-1)
+        y = random.randint(0,map_size-1)
+        direct = random.choice(['north','south','east','west'])
+        valid = test_ship_placement(ship_type,x,y,direct,dummy_map)
+
+    temp = ship_type + " " + str(x) + " " + str(y) + " " + direct
+    ship_command_placement.append(temp)
+    InsertShipIntoMap(temp,dummy_map)
+
+    # Outputting the results into the file to be read by the game
     with open(os.path.join(output_path, place_ship_file), 'w') as f_out:
         for ship in ships:
             f_out.write(ship)
             f_out.write('\n')
     return
 
-
-
-
+  
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('PlayerKey', nargs='?', help='Player key registered in the game')
