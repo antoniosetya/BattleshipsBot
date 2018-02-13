@@ -1,0 +1,14 @@
+
+13-02-2018 23:46:38:436 - I: 	Executing process python.exe "" A "C:\Users\alvin limassa\Documents\GitHub\BattleshipsBot\Game Engine\Replays\2018-02-13 23-46-38-139\Phase 1 - Round 0\A"
+13-02-2018 23:46:38:498 - I: 	Bot calibration complete and can run an additional 69ms due to environment startup
+13-02-2018 23:46:38:514 - D: 	Executing bot with following commands python.exe "bot.py" A "C:\Users\alvin limassa\Documents\GitHub\BattleshipsBot\Game Engine\Replays\2018-02-13 23-46-38-139\Phase 1 - Round 0\A"
+13-02-2018 23:46:38:514 - I: 	Executing process python.exe "bot.py" A "C:\Users\alvin limassa\Documents\GitHub\BattleshipsBot\Game Engine\Replays\2018-02-13 23-46-38-139\Phase 1 - Round 0\A"
+13-02-2018 23:46:38:514 - I: 	Bot has 4000ms to run before it will be forcefully killed
+13-02-2018 23:46:38:592 - I: 	Output from bot: Cruiser 1 0 east
+13-02-2018 23:46:38:592 - I: 	Output from bot: Submarine 9 6 south
+13-02-2018 23:46:38:592 - I: 	Output from bot: Destroyer 3 7 west
+13-02-2018 23:46:38:592 - I: 	Output from bot: Carrier 8 0 north
+13-02-2018 23:46:38:592 - I: 	Output from bot: Battleship 7 4 south
+13-02-2018 23:46:38:592 - I: 	Output from bot: 
+13-02-2018 23:46:38:592 - E: 	Output from bot: 
+13-02-2018 23:46:38:592 - I: 	Your bots total execution time was 00:00:00.0905765

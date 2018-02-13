@@ -1,0 +1,17 @@
+
+13-02-2018 23:45:29:614 - D: 	Executing bot with following commands python.exe "bot.py" B "C:\Users\alvin limassa\Documents\GitHub\BattleshipsBot\Game Engine\Replays\2018-02-13 23-45-25-145\Phase 2 - Round 15\B"
+13-02-2018 23:45:29:614 - I: 	Executing process python.exe "bot.py" B "C:\Users\alvin limassa\Documents\GitHub\BattleshipsBot\Game Engine\Replays\2018-02-13 23-45-25-145\Phase 2 - Round 15\B"
+13-02-2018 23:45:29:630 - I: 	Bot has 4000ms to run before it will be forcefully killed
+13-02-2018 23:45:29:708 - E: 	Output from bot: Traceback (most recent call last):
+13-02-2018 23:45:29:708 - E: 	Output from bot:   File "bot.py", line 444, in <module>
+13-02-2018 23:45:29:708 - E: 	Output from bot:     main(args.PlayerKey)
+13-02-2018 23:45:29:708 - E: 	Output from bot:   File "bot.py", line 30, in main
+13-02-2018 23:45:29:708 - E: 	Output from bot:     fire_shot(state['OpponentMap']['Cells'])
+13-02-2018 23:45:29:708 - E: 	Output from bot:   File "bot.py", line 159, in fire_shot
+13-02-2018 23:45:29:708 - E: 	Output from bot:     attackstatus = attack_state(opponent_map)
+13-02-2018 23:45:29:708 - E: 	Output from bot:   File "bot.py", line 150, in attack_state
+13-02-2018 23:45:29:708 - E: 	Output from bot:     return attackstatus, firsthitx, firsthity, attackdirection,x,y
+13-02-2018 23:45:29:708 - E: 	Output from bot: UnboundLocalError: local variable 'attackdirection' referenced before assignment
+13-02-2018 23:45:29:708 - E: 	Output from bot: 
+13-02-2018 23:45:29:708 - I: 	Output from bot: 
+13-02-2018 23:45:29:708 - I: 	Your bots total execution time was 00:00:00.0950462

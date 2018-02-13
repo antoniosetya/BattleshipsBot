@@ -1,0 +1,17 @@
+
+13-02-2018 23:45:30:834 - D: 	Executing bot with following commands python.exe "bot.py" B "C:\Users\alvin limassa\Documents\GitHub\BattleshipsBot\Game Engine\Replays\2018-02-13 23-45-25-145\Phase 2 - Round 20\B"
+13-02-2018 23:45:30:834 - I: 	Executing process python.exe "bot.py" B "C:\Users\alvin limassa\Documents\GitHub\BattleshipsBot\Game Engine\Replays\2018-02-13 23-45-25-145\Phase 2 - Round 20\B"
+13-02-2018 23:45:30:849 - I: 	Bot has 4000ms to run before it will be forcefully killed
+13-02-2018 23:45:30:927 - E: 	Output from bot: Traceback (most recent call last):
+13-02-2018 23:45:30:927 - E: 	Output from bot:   File "bot.py", line 444, in <module>
+13-02-2018 23:45:30:927 - E: 	Output from bot:     main(args.PlayerKey)
+13-02-2018 23:45:30:927 - E: 	Output from bot:   File "bot.py", line 30, in main
+13-02-2018 23:45:30:927 - E: 	Output from bot:     fire_shot(state['OpponentMap']['Cells'])
+13-02-2018 23:45:30:927 - E: 	Output from bot:   File "bot.py", line 159, in fire_shot
+13-02-2018 23:45:30:927 - E: 	Output from bot:     attackstatus = attack_state(opponent_map)
+13-02-2018 23:45:30:927 - E: 	Output from bot:   File "bot.py", line 72, in attack_state
+13-02-2018 23:45:30:927 - E: 	Output from bot:     with open(os.path.join(prev_output_path, attack_status), 'r') as f_inz:
+13-02-2018 23:45:30:927 - E: 	Output from bot: FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\alvin limassa\\Documents\\GitHub\\BattleshipsBot\\Game Engine\\Replays\\2018-02-13 23-45-25-145\\Phase 2 - Round 19/B\\attackstatus.txt'
+13-02-2018 23:45:30:927 - E: 	Output from bot: 
+13-02-2018 23:45:30:927 - I: 	Output from bot: 
+13-02-2018 23:45:30:927 - I: 	Your bots total execution time was 00:00:00.0883712
