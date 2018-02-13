@@ -212,10 +212,25 @@ def fire_shot(opponent_map):
             
     if not targets:
         for cell in opponent_map:
-            if not cell['Damaged'] and not cell['Missed'] and (int(cell['X']) + int(cell['Y'])) % 2 == 0 and int(attackstatus[0]) == 0:
+            if int(attackstatus[0])== 2:
+                if cell['Damaged']:
+                    for cellss in opponent_map:
+                        if cell['X']+1 == cellss['X'] and cell['Y'] == cellss['Y']:
+                            valid_cell = cell['X'], cell['Y']
+                            targets.append(valid_cell)
+                        if cell['X']-1 == cellss['X'] and cell['Y'] == cellss['Y']:
+                            valid_cell = cell['X'], cell['Y']
+                            targets.append(valid_cell)
+                        if cell['X'] == cellss['X'] and cell['Y'] +1 == cellss['Y']:
+                            valid_cell = cell['X'], cell['Y']
+                            targets.append(valid_cell)
+                        if cell['X']+1 == cellss['X'] and cell['Y']-1== cellss['Y']:
+                            valid_cell = cell['X'], cell['Y']
+                            targets.append(valid_cell)
+            elif not cell['Damaged'] and not cell['Missed'] and (int(cell['X']) + int(cell['Y'])) % 2 == 0 and int(attackstatus[0]) == 0:
                 valid_cell = cell['X'], cell['Y']
                 targets.append(valid_cell)
-            if not cell['Damaged'] and not cell['Missed'] and int(attackstatus[0]) == 1:
+            elif not cell['Damaged'] and not cell['Missed'] and int(attackstatus[0]) == 1:
                 if not cell['Damaged'] and not cell['Missed'] and int(attackstatus[0]) == 1 and int(cell['X']) == int(attackstatus[1])+1 and int(cell['Y']) == int(attackstatus[2]):
                     valid_cell = cell['X'], cell['Y']
                     targets.append(valid_cell)
@@ -228,11 +243,7 @@ def fire_shot(opponent_map):
                 if not cell['Damaged'] and not cell['Missed'] and int(attackstatus[0]) == 1 and int(cell['X']) == int(attackstatus[1]) and int(cell['Y']) == int(attackstatus[2])+1:
                     valid_cell = cell['X'], cell['Y']
                     targets.append(valid_cell)
-    if not targets:
-        for cell in opponent_map:
-            if not cell['Damaged'] and not cell['Missed']:
-                valid_cell = cell['X'], cell['Y']
-                targets.append(valid_cell)
+   
     target = random.choice(targets)
     with open(os.path.join(output_path, game_state_file), 'r') as f_inxx:
         state = json.load(f_inxx)
