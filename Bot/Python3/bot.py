@@ -1,7 +1,8 @@
 import argparse
 import json
 import os
-from random import choice
+import random
+import copy
 
 command_file = "command.txt"
 place_ship_file = "place.txt"
@@ -9,6 +10,13 @@ game_state_file = "state.json"
 output_path = '.'
 map_size = 0
 attack_status = "attackstatus.txt"
+
+
+ship_size = {"Submarine" : 3,
+            "Battleship" : 4,
+            "Carrier" : 5,
+            "Cruiser" : 3,
+            "Destroyer" : 2}
 
 def main(player_key):
     global map_size
@@ -132,10 +140,10 @@ def fire_shot(opponent_map):
     #  code 1 is your choice)
 
     #proses pengaksesan state sebelumnya
-    
+
     attackstatus = attack_state(opponent_map)
     targets = []
-    
+
     for cell in opponent_map:
         if not cell['Damaged'] and not cell['Missed'] and (int(cell['X']) + int(cell['Y'])) % 2 == 0 and int(attackstatus[0]) == 0:
             valid_cell = cell['X'], cell['Y']
@@ -173,7 +181,7 @@ def fire_shot(opponent_map):
             if not cell['Damaged'] and not cell['Missed'] and int(attackstatus[0]) == 1 and int(cell['X']) >= int(attackstatus[4])-3 and int(cell['X']) <= int(attackstatus[4])+3 and int(cell['Y']) <= int(attackstatus[5])+3 and int(cell['Y']) >= int(attackstatus[5])-3:
                 valid_cell = cell['X'], cell['Y']
                 targets.append(valid_cell)
-            
+
     if not targets:
         for cell in opponent_map:
             if not cell['Damaged'] and not cell['Missed'] and (int(cell['X']) + int(cell['Y'])) % 2 == 0 and int(attackstatus[0]) == 0:
@@ -193,30 +201,17 @@ def fire_shot(opponent_map):
                     valid_cell = cell['X'], cell['Y']
                     targets.append(valid_cell)
 
-    target = choice(targets)
+    target = random.choice(targets)
     with open(os.path.join(output_path, game_state_file), 'r') as f_inxx:
         state = json.load(f_inxx)
-    if map_size == 10:
-        energyround = 3
-    elif map_size ==14:
-        energyround = 4
-    else:
-        energyround = 2
-    seekerenergy = energyround * 10
-    """
-    if int(attackstatus[0]) == 1 and state['PlayerMap']['Owner']['Energy'] >= seekerenergy  and int(attackstatus[3]) != 0:
-        output_shot2(*target)
-    else:
-    """
+
     output_shot(*target)
     targetx = target[0]
     targety = target[1]
     enemyboatcount = ship_count(state['OpponentMap']['Ships'])
     countboat = enemyboatcount[0]
     countsisa = enemyboatcount[1]
-    
-    
-    
+
     with open(os.path.join(output_path, attack_status), 'w') as f_out:
         f_out.write('{} {}'.format(targetx,targety))
         f_out.write('\n')
@@ -252,6 +247,72 @@ def ship_count(enemy_location):
             sisa += 2
     return count,sisa
 
+def InsertShipIntoMap(cmd,map):
+    # Inserting a ship to the dummy map based on the command string
+    # cmd is assumed to be valid (please test cmd configuration first with test_ship_placement)
+    global ship_size
+    ship = (copy.copy(cmd)).split(" ")
+    type = ship[0]
+    x = int(ship[1])
+    y = int(ship[2])
+    direct = ship[3]
+    for i in range(ship_size[type]):
+        if (direct == "north"):
+            map[y + i][x] = 'X'
+        elif (direct == "east"):
+            map[y][x + i] = 'X'
+        elif (direct == "south"):
+            map[y - i][x] = 'X'
+        else: # direct == "west"
+            map[y][x - i] = 'X'
+
+def test_ship_placement(ship,x,y,direct,map):
+    # Returns true if ship can be placed with given settings.
+    # Otherwise, returns false.
+    global map_size, ship_size
+    valid = True
+    i = 0
+    if ((x < 0) or (y < 0) or (x >= map_size) or (y >= map_size)):
+        valid = False
+    else:
+        if (direct == "north"):
+            if ((y + ship_size[ship]) >= map_size):
+                valid = False
+            else:
+                while (i < ship_size[ship]) and valid:
+                    if (map[y + i][x] != 'X'):
+                        i = i + 1
+                    else:
+                        valid = False
+        elif (direct == "south"):
+            if ((y - ship_size[ship]) < 0):
+                valid = False
+            else:
+                while (i < ship_size[ship]) and valid:
+                    if (map[y - i][x] != 'X'):
+                        i = i + 1
+                    else:
+                        valid = False
+        elif (direct == "east"):
+            if ((x + ship_size[ship]) >= map_size):
+                valid = False
+            else:
+                while (i < ship_size[ship]) and valid:
+                    if (map[y][x + i] != 'X'):
+                        i = i + 1
+                    else:
+                        valid = False
+        else: # direct == "west"
+            if ((x - ship_size[ship]) < 0):
+                valid = False
+            else:
+                while (i < ship_size[ship]) and valid:
+                    if (map[y][x - i] != 'X'):
+                        i = i + 1
+                    else:
+                        valid = False
+    return valid
+
 def place_ships():
     # Please place your ships in the following format <Shipname> <x> <y> <direction>
     # Ship names: Battleship, Cruiser, Carrier, Destroyer, Submarine
@@ -261,7 +322,7 @@ def place_ships():
           For the second, third, and fourth ship, select between 1 or 2 spaces (1 - 3 for bigger map (14x14)) that go between currently
           selected ship and the previous ship.
           For each ship, the direction is perpendicular to the previously placed ship. """
-    global map_size
+    global map_size, ship_size
     dummy_map = []
     for i in range(map_size):
         dummy_map.append([])
@@ -290,28 +351,12 @@ def place_ships():
     ship_command_placement.append(temp)
     # Puts that information into the dummy map
     InsertShipIntoMap(temp,dummy_map)
-    # Removes that ship type from the list of ships
-    # ships.remove(ship_type)
 
     # Placing the 2nd - 4th ship
-    """if (map_size >= 14):
-        max_dist = 3
-    else:
-        max_dist = 2 """
-
     for i in range(3):
-        # previous_ship = (copy.copy(ship_command_placement[-1])).split(" ")
         ship_type = random.choice(ships) # Randomize what ship will be put now
         valid = False
         while not valid:
-            # The alternative way
-            """ dist = random.choice([random.randint(1,max_dist),random.randint(0-max_dist,-1)])
-            x = dist + int(previous_ship[1])
-            y = dist + int(previous_ship[2])
-            if ((previous_ship[3] == "north") or (previous_ship[3] == "south")):
-                direct = random.choice(["east","west"])
-            else:
-                direct = random.choice(["north","south"])  """
             # Currently used steps - just randomize it
             x = random.randint(0,map_size-1)
             y = random.randint(0,map_size-1)
@@ -322,6 +367,7 @@ def place_ships():
         ship_command_placement.append(temp)
         # Removes that ship type from the list of ships
         ships.remove(ship_type)
+        # Puts that information into the dummy map
         InsertShipIntoMap(temp,dummy_map)
 
     # Placing the last ship
@@ -332,19 +378,18 @@ def place_ships():
         y = random.randint(0,map_size-1)
         direct = random.choice(['north','south','east','west'])
         valid = test_ship_placement(ship_type,x,y,direct,dummy_map)
-
     temp = ship_type + " " + str(x) + " " + str(y) + " " + direct
+    print(temp)
     ship_command_placement.append(temp)
-    InsertShipIntoMap(temp,dummy_map)
 
     # Outputting the results into the file to be read by the game
     with open(os.path.join(output_path, place_ship_file), 'w') as f_out:
-        for ship in ships:
+        for ship in ship_command_placement:
             f_out.write(ship)
             f_out.write('\n')
     return
 
-  
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('PlayerKey', nargs='?', help='Player key registered in the game')
