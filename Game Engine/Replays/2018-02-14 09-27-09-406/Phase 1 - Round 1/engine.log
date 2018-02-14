@@ -1,7 +1,0 @@
-
-14-02-2018 09:27:10:145 - I: 	Added Command DoNothingCommand for Player py3Bot
-14-02-2018 09:27:10:223 - I: 	Added Command DoNothingCommand for Player py3Bot
-14-02-2018 09:27:10:223 - D: 	Beginning round processing
-14-02-2018 09:27:10:223 - D: 	Processing Player Commands
-14-02-2018 09:27:10:223 - E: 	Failed to process command DoNothingCommand for player py3BotGameEngine.Exceptions.InvalidCommandException: There was a problem during the placement of player's py3Bot ships (DoNothing), the round will be played over
-   at GameEngine.Engine.GameRoundProcessor.ProcessPlayerCommands() in C:\Development\Entelect Challenge\2017-Battleships\GameEngine\Battleships\GameEngine\Engine\GameRoundProcessor.cs:line 215
