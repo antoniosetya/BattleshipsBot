@@ -236,12 +236,18 @@ def fire_shot(opponent_map):
                     targets.append(valid_cell)
     if not targets:
         stat = 0
+        fx = -1
+        fy = -1
+        direc = 0
         for cell in opponent_map:
             if not cell['Damaged'] and not cell['Missed'] and (int(cell['X']) + int(cell['Y'])) % 2 == 0:
                 valid_cell = cell['X'], cell['Y']
                 targets.append(valid_cell)
     else:
         stat = int(attackstatus[0])
+        fx = int(attackstatus[1])
+        fy = int(attackstatus[2])
+        direc = int(attackstatus[3])
     target = random.choice(targets)
     with open(os.path.join(output_path, game_state_file), 'r') as f_inxx:
         state = json.load(f_inxx)
@@ -263,11 +269,11 @@ def fire_shot(opponent_map):
         f_out.write('\n')
         f_out.write('{}'.format(countsisa))
         f_out.write('\n')
-        f_out.write('{}'.format(attackstatus[1]))
+        f_out.write('{}'.format(fx))
         f_out.write('\n')
-        f_out.write('{}'.format(attackstatus[2]))
+        f_out.write('{}'.format(fy))
         f_out.write('\n')
-        f_out.write('{}'.format(attackstatus[3]))
+        f_out.write('{}'.format(direc))
     return
 
 
